@@ -1,10 +1,7 @@
-# CU_Shear
-Gets the shear in a cast unit, from multiple CSI SAP models using the SAP OAPI in VB.NET.
+# Sap2000-API
+Uses the Sap2000 Open Api to get the models information into an object oriented format using VB.Net
 
-There were 2 reasons for writing this program:
 
-1.	When designing structures, the engineer normally prefers to view the cast unit as a whole rather than as separate elements. CSI SAP does not give the engineers this option. This program will retrieve data associated with an entire cast unit. Later these values can be exported to a spreadsheet and viewed there. 
-2.	Often a design will require forces from multiple files. This is specially the case when there are seismic loads involved. Some specification may require designing without shear walls under reduced seismic loads in addition to the normal analysis. This program gives the user the option to fetch results from multiple SAP models
 
 #Requirements
 In order for this program to run CSI SAP 2000 V16 must be installed on the system. The program should work for other SAP versions, by either:
@@ -12,20 +9,38 @@ In order for this program to run CSI SAP 2000 V16 must be installed on the syste
 <br>or
 <br>2-	Changing the code from early binding to late binding. 
 
-#How to:
-<b>Step 1</b>: You will need to create a new SapStructure object. There are several inputs to the constructor:
-- __strPath: The path to one of the SAP model files.
-- __X: The X coordinate of a point on the cast unit
-- __Y: The Y coordinate of a point on the cast unit.
-- __Z: The Z coordinate of a point on the cast unit. 
-- __type: The type of cast unit, beam or column. Columns are assumed to be in the Z direction and beams are assumed to be in either the X or Y direction. Note for columns the __Z parameter is irrelevant. For beams depending on the direction the __X or __Y parameters will be irrelevant. 
-- __dir: X or Y. This is only relevant for beams. 
+#SapStructure#
+##Constructor##
+The full path to one of the sap models is passed to the constructor and information regarding the model is retrieved. Note that force values will not be retrieved
 
-<br><b>Step 2:</b>
-For each model call the <code>GetResults_LoadCases</code> function. This will fetch the forces from the sap analysis. 
+##GetResults##
+Retrieves analysis results from the input sap model. Note you can call this function multiple times with different models and all the forces will be added to the object under different model names.
 
-<br><b>Step 3:</b>
-when finished working with the program release resources by calling <code>CloseApplication</code>
+##SaveObject##
+The program may take along time opening and closing multiple sap files. Using this function you can save the object before exiting. The next time you run the program you can call Open object to load the SapStructure object.
+
+##OpenObject##
+See SaveObject
+
+##CloseApplication##
+Will close any open sap models. 
+
+##GetElement##
+Returns reference to the an element object based on the input ID
+
+#Element#
+This object contains information regarding a single element in sap
+
+##Dir##
+The direction of the element, X, Y, Z or Diagonal
+
+##Forces##
+A list of force objects. 
+
+
+
+
+
 
 #Output
 The SapStructure object provides 3 output:
