@@ -1,0 +1,6 @@
+*.config
+obj/
+bin/
+SapStructure/
+my Project
+*.vbproj
