@@ -87,7 +87,7 @@ Public Class ForceType
     ''' <param name="__Case">The force load case</param>
     ''' <param name="__Model">The force model</param>
     ''' <remarks></remarks>
-    Friend Sub AddForce(ByVal __Value As Double, ByVal __Case As String, ByVal __Model As String, _
+    Friend Sub AddForce(ByVal __Value As Double, ByVal __Model As String, ByVal __Case As String, _
                         ByVal __IsCombo As Boolean)
         Dim _tmpForce As Force_LoadCase
         Dim _CaseIndex As Long
